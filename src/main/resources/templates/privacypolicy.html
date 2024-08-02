@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:with="http://www.thymeleaf.org/extras/with" layout:decorate="~{layout_nonav}" with:title="Privacy Policy">
+<th:block layout:fragment="content">
+	<br />
+	<center>
+		<h1 style="text-decoration: underline;">Privacy Policy</h1>
+	</center>
+	<br />
+	<div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}" />
+	<p>This Privacy Policy governs the manner in which Kwizzles collects, uses, maintains, and discloses information
+		collected from users ("Users") of the Kwizzles mobile application ("App").<br />1. Information We
+		Collect<br />1.1. Personal Identification Information: We may collect personal identification information from
+		Users in a variety of ways, including when Users register on the App, subscribe to the newsletter, respond to a
+		survey, and in connection with other activities, services, features, or resources we make available on our App.
+		Users may be asked for, as appropriate, name, email address, and other relevant information.<br />1.2.
+		Non-personal Identification Information: We may collect non-personal identification information about Users
+		whenever they interact with our App. Non-personal identification information may include the type of device
+		used, operating system, internet service provider, and other similar information.<br />2. How We Use Collected
+		Information<br />2.1. To Personalize User Experience: We may use information in the aggregate to understand how
+		our Users as a group use the services and resources provided on our App.<br />2.2. To Send Periodic Emails: If
+		Users have opted in to receive our newsletter, they may receive emails that may include company news, updates,
+		related product or service information, etc. If at any time the User would like to unsubscribe from receiving
+		future emails, we include detailed unsubscribe instructions at the bottom of each email.<br />3. How We Protect
+		Your Information<br />3.1. We adopt appropriate data collection, storage, and processing practices and security
+		measures to protect against unauthorized access, alteration, disclosure, or destruction of your personal
+		information, username, password, transaction information, and data stored on our App.<br />4. Sharing Your
+		Personal Information<br />4.1. We do not sell, trade, or rent Users' personal identification information to
+		others. We may share generic aggregated demographic information not linked to any personal identification
+		information regarding visitors and users with our business partners, trusted affiliates, and advertisers for the
+		purposes outlined above.<br />5. Compliance with Children's Online Privacy Protection Act<br />5.1. Protecting
+		the privacy of the very young is especially important. For that reason, we never collect or maintain information
+		on our App from those we actually know are under 13, and no part of our App is structured to attract anyone
+		under 13.<br />6. Changes to This Privacy Policy<br />6.1. Kwizzles has the discretion to update this Privacy
+		Policy at any time. When we do, we will revise the updated date at the bottom of this page. We encourage Users
+		to frequently check this page for any changes to stay informed about how we are helping to protect the personal
+		information we collect. You acknowledge and agree that it is your responsibility to review this Privacy Policy
+		periodically and become aware of modifications.<br />7. Your Acceptance of These Terms<br />7.1. By using this
+		App, you signify your acceptance of this Privacy Policy. If you do not agree to this policy, please do not use
+		our App. Your continued use of the App following the posting of changes to this policy will be deemed your
+		acceptance of those changes.<br />8. Contacting Us<br />8.1. If you have any questions about this Privacy
+		Policy, the practices of this App, or your dealings with this App, please contact us at contact@pranavaeet.com.
+	</p>
+</th:block>
+
+</html>

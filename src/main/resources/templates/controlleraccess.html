@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:with="http://www.thymeleaf.org/extras/with" layout:decorate="~{layout}" with:title="Welcome">
+<th:block layout:fragment="content">
+    <center>
+        <h1 style="text-decoration: underline;">Controllers</h1>
+    </center>
+    <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}" />
+    <div class="my-2">
+        <div class="col-md-12">
+            <form class="form-inline searchbar" th:action="@{/controller/controllerlist}" th:object="${params}" id="searchForm">
+                <div class="form-group">
+                    <label for="keyword">Keyword:</label>
+                    <input class="form-control" id="keyword" type="text" name="keyword" th:value="*{keyword}"
+                        placeholder="Enter keyword">
+                </div>
+                <div class="form-group">
+                    <label for="levelId" class="col-form-label">Items per page</label>
+                    <select class="form-control" th:field="*{size}">
+                        <option value="10" selected>10</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="-1">All</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form><br />
+            <p class="pull-left">
+                <a href="/controller/addcontroller" class="btn btn-primary"><i class="fas fa-user-plus ml-2"> Add
+                        Controller</i></a>
+            </p>
+            <div th:switch="${controllers}" class="my-5">
+                <div class="col-md-12">
+                    <h2 th:case="null">No users yet!</h2>
+                    <div th:case="*">
+                        <br />
+                        <div class="pull-left">
+                            Total Rows: [[${totalItems}]]
+                        </div>
+                        <table class="table table-striped table-responsive-md">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Controller Name</th>
+                                    <th>Roles Can Access</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="controller,iterStat: ${controllers}">
+                                    <td th:text="${((currentPage-1)*params.size)+iterStat.index+1}"></td>
+                                    <td th:text="${controller.name}"/>
+                                    <td>
+                                        <th:block th:each="role : ${controller.roles}">
+                                            <span th:text="${role.name}"></span>
+                                            <span th:if="${not #strings.isEmpty(role)}">,</span>
+                                        </th:block>
+                                    </td>
+                                    <td><a th:href="@{/controller/editcontroller/{id}(id=${controller.id})}" class="btn btn-primary"><i
+                                                class="fas fa-user-edit ml-2"></i></a>
+                                     </td>
+                                    <td> <button type="button" class="btn btn-primary controllerdeletebtn" data-toggle="modal" th:data-id="|${controller.id}|">
+                                        <i class="fas fa-user-times ml-2"></i></button></td>    
+                                    </td> 
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div th:if="${totalPages > 1}">
+                            <div class="row col-sm-12">
+                                <div class="col-sm-2">
+                                    Total Rows: [[${totalItems}]]
+                                </div>
+                                <div class="col-sm-2">
+                                    <a th:if="${currentPage > 1}"
+                                        th:href="@{'/controller/controllerlist/page/' + ${currentPage - 1}(keyword=${param.keyword})}">Prev</a>
+                                    <span th:if="${currentPage == 1}">Prev</span>
+                                </div>
+                                <div class="col-sm-4">
+                                    <span th:text="${currentPage}">current</span> &nbsp; of &nbsp;
+                                    <span th:text="${totalPages}">total</span> Pages
+                                </div>
+                                <div class="col-sm-2">
+                                    <a th:if="${currentPage < totalPages}"
+                                        th:href="@{'/controller/controllerlist/page/' + ${currentPage + 1}(keyword=${param.keyword})}">Next</a>
+                                    <span th:unless="${currentPage < totalPages}">Next</span>
+                                </div>
+                                <div class="col-sm-2">
+                                    <a th:if="${currentPage < totalPages}"
+                                        th:href="@{'/controller/controllerlist/page/' + ${totalPages}(keyword=${param.keyword})}">Last</a>
+                                    <span th:unless="${currentPage < totalPages}">Last</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+</html>

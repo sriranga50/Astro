@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}" with:title="Welcome">
+<head>
+    <title th:text="${title}">Welcome</title>
+    <script  th:inline="javascript">
+        const existingControllers = /*[[${existingcontrollers}]]*/ '[[${existingcontrollers}]]';
+        const prevcontrollername=/*[[${controller.name}]]*/ '[[${controller.name}]]';
+       function validateForm() {
+           const selectElement = document.getElementById('allroles');
+           const selectedOptions = Array.from(selectElement.selectedOptions);
+           if (selectedOptions.length === 0) {
+               alert('Please select at least one role.');
+               return false;
+           }
+           const userControllerInput = document.getElementById('name').value;
+           const occurrences = existingControllers.filter(name => name === userControllerInput).length;
+            if ((userControllerInput!=prevcontrollername && occurrences>0)|| (userControllerInput===prevcontrollername && occurrences>1)) {
+                alert('The controller already exists. Please choose a different username.');
+                return false;
+            }
+           return true;
+       }
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/css/multi-select-tag.css">
+</head>
+<body>
+<th:block layout:fragment="content">
+    <center>
+        <h1 style="text-decoration: underline;">Update a User</h1>
+    </center>
+    <div th:if="${message}" th:text="${message}" th:class="'alert ' + ${alertClass}"></div>
+    <div class="my-2">
+        <div class="col-md-12">
+            <form id="update_controller" action="#" th:action="@{/controller/updatecontroller/{id}(id=${controller.id})}" th:object="${controller}" method="post" onsubmit="return validateForm()" >
+                <div class="row">
+                    <div class="form-group col-md-8">
+                        <label for="name" class="col-form-label">Controller Name</label>
+                        <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Controller End Point" required>
+                        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label for="allroles" class="col-form-label">Role</label>
+                        <select name="roleIds" id="allroles" multiple >
+                            <option th:each="role : ${allroles}" th:value="${role.id}"
+                                    th:text="${role.name}" th:attr="selected=${#lists.contains(controller.roles, role)}"></option>
+                        </select>
+<!--                        <div th:each="role : ${roles}">-->
+<!--                            <input type="checkbox" name="roleIds" th:value="${role.id}" th:checked="${#lists.contains(user.roles, role)}" id="|role-${role.id}|">-->
+<!--                            <label th:for="|role-${role.id}|" th:text="${role.name}"></label>-->
+<!--                        </div>-->
+                    </div>
+                    <div class="col-md-6">
+                        <input type="submit" class="btn btn-primary" value="Update Controller">
+                        <a class="btn btn-primary" th:href="@{/controller/controllerlist}">Go Back</a>
+                    </div>
+                </div>
+            </form>
+            <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/js/multi-select-tag.js"></script>
+            <script>
+                new MultiSelectTag('allroles')  //
+            </script>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>

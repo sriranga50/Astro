@@ -1,0 +1,54 @@
+<div class="footer text-center" th:fragment="footer">
+  <br/><br/><p> <a href="#"> Terms of Use</a> | <a href="#">What's New</a> | <a href="#">Help</a> </p>
+   <!-- javascripts -->
+   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js">
+   </script>
+   <script> 
+           $(document).on('click', '.userdeletebtn', function (e) {
+           var deleteId = $(this).data('id');
+           $('#deleteConfirmModalHref').attr('href', '/user/delete/'+deleteId);
+           $('#deleteConfirmModal .modal-body').html("Please confirm delete")
+           $('#deleteConfirmModal').modal('show');
+       });
+           $(document).on('click', '.controllerdeletebtn', function (e) {
+           var deleteId = $(this).data('id');
+           $('#deleteConfirmModalHref').attr('href', '/controller/deletecontroller/'+deleteId);
+           $('#deleteConfirmModal .modal-body').html("Please confirm delete")
+           $('#deleteConfirmModal').modal('show');
+       });
+       $(document).on('click', '.roledeletebtn', function (e) {
+           var deleteId = $(this).data('id');
+           $('#deleteConfirmModalHref').attr('href', '/role/deleterole/'+deleteId);
+           $('#deleteConfirmModal .modal-body').html("Please confirm delete")
+           $('#deleteConfirmModal').modal('show');
+       });
+       $(document).on('click', '.planetdeletebtn', function (e) {
+           var deleteId = $(this).data('id');
+           $('#deleteConfirmModalHref').attr('href', '/planet/deleteplanet/'+deleteId);
+           $('#deleteConfirmModal .modal-body').html("Please confirm delete")
+           $('#deleteConfirmModal').modal('show');
+       });
+  
+   </script>
+  
+</div>
+<!-- Modal -->
+<div class="modal" id="deleteConfirmModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="deleteConfirmModalLabel">Delete Confirmation</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <div class="modal-body">
+         By confirming, the system will delete all the related options of the question. Please confirm.
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         <a href="#" id="deleteConfirmModalHref" class="btn btn-primary">Delete</a>
+       </div>
+     </div>
+   </div>
+ </div>

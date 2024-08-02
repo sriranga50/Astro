@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+xmlns:with="http://www.thymeleaf.org/extras/with" layout:decorate="~{layout}" with:title="Welcome">
+<head>
+    <meta charset="UTF-8">
+    <title>Controller List</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<th:block layout:fragment="content">
+    <div class="container mt-5">
+        <h2 class="mb-4">Controller List</h2>
+        
+        <!-- General Controllers -->
+        <h4 class="mt-4">General Controllers</h4>
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action">/welcome</a>
+        </div>
+        
+        <!-- AuthController -->
+        <h4 class="mt-4">AuthController</h4>
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action">/auth/welcome</a>
+            <a href="#" class="list-group-item list-group-item-action">/auth/addnewuser</a>
+            <a href="#" class="list-group-item list-group-item-action">/auth/processsignup</a>
+            <a href="#" class="list-group-item list-group-item-action">/auth/logout</a>
+            <a href="#" class="list-group-item list-group-item-action">/auth/signin</a>
+        </div>
+        
+        <!-- UserInfoController -->
+        <h4 class="mt-4">UserInfoController</h4>
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action">/user/list</a>
+            <a href="#" class="list-group-item list-group-item-action">/user/list/page/{pageNo}</a>
+            <a href="#" class="list-group-item list-group-item-action">/user/list/page/{pageNo}/{size}/{keyword}</a>
+            <a href="#" class="list-group-item list-group-item-action">/user/add</a>
+            <a href="#" class="list-group-item list-group-item-action">/user/addsubmit</a>
+            <a href="#" class="list-group-item list-group-item-action">/user/edit/{id}</a>
+            <a href="#" class="list-group-item list-group-item-action">/user/update/{id}</a>
+            <a href="#" class="list-group-item list-group-item-action">/user/delete/{id:\\d+}</a>
+        </div>
+        
+        <!-- RoleController -->
+        <h4 class="mt-4">RoleController</h4>
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action">/role/rolelist</a>
+            <a href="#" class="list-group-item list-group-item-action">/role/rolelist/page/{pageNo}</a>
+            <a href="#" class="list-group-item list-group-item-action">/role/rolelist/page/{pageNo}/{size}/{keyword}</a>
+            <a href="#" class="list-group-item list-group-item-action">/role/addrole</a>
+            <a href="#" class="list-group-item list-group-item-action">/role/addrolesubmit</a>
+            <a href="#" class="list-group-item list-group-item-action">/role/editrole/{id}</a>
+            <a href="#" class="list-group-item list-group-item-action">/role/updaterole/{id}</a>
+            <a href="#" class="list-group-item list-group-item-action">/role/deleterole/{id:\\d+}</a>
+        </div>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</th:block>
+</html>

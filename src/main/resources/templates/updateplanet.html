@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:with="http://www.thymeleaf.org/extras/with" layout:decorate="~{layout}" with:title="Welcome">
+<head>
+    <script  th:inline="javascript">
+        const existingplanetnames = /*[[${existingplanetnames}]]*/ '[[${existingplanetnames}]]';
+        const prevplanetname=/*[[${planetdata.planetname}]]*/ '[[${planetdata.planetname}]]';
+         function validateForm() {
+          const planetnameInput = document.getElementById('planetname').value;
+           const occurrences = existingplanetnames.filter(name => name === planetnameInput).length;
+            if ((planetnameInput!=prevplanetname && occurrences>0)|| (planetnameInput===prevplanetname && occurrences>1)) {
+                alert('The Planet already exists. Please choose a different Planet name.');
+                return false;
+            }
+           return true;
+       }
+    </script>
+</head>
+<th:block layout:fragment="content">
+    <center>
+        <h1 style="text-decoration: underline;">Update the Planet</h1>
+    </center>
+    <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}" />
+    <div class="my-2">
+        <div class="col-md-12">
+            <form action="#" th:action="@{/planet/updateplanet/{id}(id=${planetdata.id})}" th:object="${planetdata}" method="post" onsubmit="return validateForm()">
+                <div class="row">
+                    <div class="form-group col-md-8">
+                        <label for="planetname" class="col-form-label">Planet Name</label>
+                        <input type="text" th:field="*{planetname}" class="form-control" id="planetname"placeholder="Planet Name" required>
+                        <span th:if="${#fields.hasErrors('planetname')}" th:errors="*{planetname}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label for="eccentricity" class="col-form-label">eccentricity</label>
+                        <input type="text" th:field="*{eccentricity}" class="form-control" id="eccentricity"placeholder="eccentricity" required>
+                        <span th:if="${#fields.hasErrors('eccentricity')}" th:errors="*{eccentricity}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label for="inclination" class="col-form-label">inclination</label>
+                        <input type="text" th:field="*{inclination}" class="form-control" id="inclination"placeholder="inclination" required>
+                        <span th:if="${#fields.hasErrors('inclination')}" th:errors="*{inclination}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label for="logitudeofperihelion" class="col-form-label">logitudeofperihelion</label>
+                        <input type="text" th:field="*{logitudeofperihelion}" class="form-control" id="logitudeofperihelion"placeholder="logitudeofperihelion" required>
+                        <span th:if="${#fields.hasErrors('logitudeofperihelion')}" th:errors="*{logitudeofperihelion}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label for="longitudeofacendingnode" class="col-form-label">longitudeofacendingnode</label>
+                        <input type="text" th:field="*{longitudeofacendingnode}" class="form-control" id="longitudeofacendingnode"placeholder="longitudeofacendingnode" required>
+                        <span th:if="${#fields.hasErrors('longitudeofacendingnode')}" th:errors="*{longitudeofacendingnode}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label for="meananomaly" class="col-form-label">meananomaly</label>
+                        <input type="text" th:field="*{meananomaly}" class="form-control" id="meananomaly"placeholder="meananomaly" required>
+                        <span th:if="${#fields.hasErrors('meananomaly')}" th:errors="*{meananomaly}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label for="meanlongitude" class="col-form-label">meanlongitude</label>
+                        <input type="text" th:field="*{meanlongitude}" class="form-control" id="meanlongitude"placeholder="meanlongitude" required>
+                        <span th:if="${#fields.hasErrors('meanlongitude')}" th:errors="*{meanlongitude}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label for="orbitalperiod" class="col-form-label">orbitalperiod</label>
+                        <input type="text" th:field="*{orbitalperiod}" class="form-control" id="orbitalperiod"placeholder="orbitalperiod" required>
+                        <span th:if="${#fields.hasErrors('orbitalperiod')}" th:errors="*{orbitalperiod}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label for="semimajoraxis" class="col-form-label">semimajoraxis</label>
+                        <input type="text" th:field="*{semimajoraxis}" class="form-control" id="semimajoraxis"placeholder="semimajoraxis" required>
+                        <span th:if="${#fields.hasErrors('semimajoraxis')}" th:errors="*{semimajoraxis}" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <input type="submit" class="btn btn-primary" value="Update Planet">
+                        <a class="btn btn-primary" th:href="@{/planet/planetlist}">Go Back</a>
+                    </div>
+                    <div class="form-group col-md-8"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</th:block>
+
+</html>

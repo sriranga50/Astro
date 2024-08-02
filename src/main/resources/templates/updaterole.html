@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:with="http://www.thymeleaf.org/extras/with" layout:decorate="~{layout}" with:title="Welcome">
+<head>
+    <script  th:inline="javascript">
+        const existingrolenames = /*[[${existingrolenames}]]*/ '[[${existingrolenames}]]';
+        const prevrolename=/*[[${role.name}]]*/ '[[${role.name}]]';
+         function validateForm() {
+          const rolenameInput = document.getElementById('name').value;
+           const occurrences = existingrolenames.filter(name => name === rolenameInput).length;
+            if ((rolenameInput!=prevrolename && occurrences>0)|| (rolenameInput===prevrolename && occurrences>1)) {
+                alert('The Role name already exists. Please choose a different name.');
+                return false;
+            }
+           return true;
+       }
+    </script>
+</head>
+<th:block layout:fragment="content">
+    <center>
+        <h1 style="text-decoration: underline;">Update the Role</h1>
+    </center>
+    <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}" />
+    <div class="my-2">
+        <div class="col-md-12">
+            <form action="#" th:action="@{/role/updaterole/{id}(id=${role.id})}" th:object="${role}" method="post" onsubmit="return validateForm()">
+                <div class="row">
+                    <div class="form-group col-md-8">
+                        <label for="name" class="col-form-label">Role Name</label>
+                        <input type="text" th:field="*{name}" class="form-control" id="name"placeholder="format: ROLE_NAME" required>
+                        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label for="roleDescription" class="col-form-label">Role Description</label>
+                        <input type="text" th:field="*{roleDescription}" class="form-control" id="roleDescription"placeholder="About Role" required>
+                        <span th:if="${#fields.hasErrors('roleDescription')}" th:errors="*{roleDescription}" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="submit" class="btn btn-primary" value="Update Role">
+                        <a class="btn btn-primary" th:href="@{/role/rolelist}">Go Back</a>
+                    </div>
+                    <div class="form-group col-md-8"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</th:block>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:with="http://www.thymeleaf.org/extras/with" layout:decorate="~{layout}" with:title="Welcome">
+<head>
+    <script th:inline="javascript">
+
+        const existingUsernames = /*[[${existingUsernames}]]*/ '[[${existingUsernames}]]';
+        console.log(existingUsernames);
+       function validateForm() {
+           const selectElement = document.getElementById('allroles');
+           const selectedOptions = Array.from(selectElement.selectedOptions);
+           console.log("in validate");
+           if (selectedOptions.length === 0) {
+               console.log("in roles");
+               alert('Please select at least one role.');
+               return false;
+           }
+
+           const usernameInput = document.getElementById('username').value;
+            if (existingUsernames.includes(usernameInput)) {
+                           console.log("in username");
+                alert('The username already exists. Please choose a different username.');
+                return false;
+            }
+           return true;
+       }
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/css/multi-select-tag.css">
+
+</head>
+<th:block layout:fragment="content">
+    <center>
+        <h1 style="text-decoration: underline;">Add an User</h1>
+    </center>
+    <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}" />
+    <div class="my-2">
+        <div class="col-md-12">
+            <form action="#" th:action="@{/user/addsubmit}" th:object="${user}" method="post" onsubmit="return validateForm()">
+                <div class="row">
+                    <div class="form-group col-md-8">
+                        <label for="username" class="col-form-label">UserName</label>
+                        <input type="text" th:field="*{username}" class="form-control" id="username" placeholder="UseName" required>
+                        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label for="allroles" class="col-form-label">Role</label>
+                        <select name="roleIds" id="allroles" multiple >
+                            <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"
+                                    th:selected="${role.name == 'ROLE_USER'}"></option>
+                        </select>
+                    </div>
+                   
+                    <div class="col-md-6">
+                        <input type="submit" class="btn btn-primary" value="Add user">
+                        <a class="btn btn-primary" th:href="@{/user/list}">Go Back</a>
+                    </div>
+                    <div class="form-group col-md-8"></div>
+                </div>
+            </form>
+            <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/js/multi-select-tag.js"></script>
+            <script>
+                new MultiSelectTag('allroles')  //
+            </script>
+        </div>
+    </div>
+</th:block>
+
+</html>

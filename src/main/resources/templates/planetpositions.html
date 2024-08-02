@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:with="http://www.thymeleaf.org/extras/with" layout:decorate="~{layout}" with:title="Welcome">
+<th:block layout:fragment="content">
+    <center>
+        <h1 style="text-decoration: underline;">Planet Locations</h1>
+    </center>
+    <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}" />
+    <div class="my-2">
+        <div class="col-md-12">
+            <br />
+
+            <div th:switch="${planetslocations}" class="my-5">
+                <div class="col-md-12">
+                    <h2 th:case="null">No Planets yet!</h2>
+                    <div th:case="*">
+                        <br />
+                        <div class="pull-left">
+                            Total Rows: [[${totalItems}]]
+                        </div>
+                        <table class="table table-striped table-responsive-md">
+                            <thead>
+                            <tr>
+<!--                                <th>#</th>-->
+                                <th>Planet</th>
+                                <th>Distance from Given Location(r)</th>
+                                <th>Theta</th>
+                                <th>Phi</th>
+                                <th>Altitude</th>
+                                <th>Azimuth</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="planet,iterStat: ${planetslocations}">
+<!--                                <td th:text="${((currentPage-1)*params.size)+iterStat.index+1}"></td>-->
+
+                                <td th:text="${planet.getPlanetname()}" ></td>
+                                <td th:text="${planet.getR()}" ></td>
+                                <td th:text="${planet.getTheta()}" ></td>
+                                <td th:text="${planet.getPhi()}" ></td>
+                                <td th:text="${planet.getElevation()}" ></td>
+                                <td th:text="${planet.getAzimuth()}" ></td>
+
+
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:with="http://www.thymeleaf.org/extras/with" layout:decorate="~{layout}" with:title="Welcome">
+<head>
+   
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/css/multi-select-tag.css"> -->
+
+</head>
+<th:block layout:fragment="content">
+    <center>
+        <h1 style="text-decoration: underline;">You are Not Autorized to View this Page</h1>
+        <!-- <a  th:href="@{/welcome}">Go Back</a> -->
+        <button class="btn btn-primary" onclick="goBack()">Go Back</button>
+    </center>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</th:block>
+
+</html>
